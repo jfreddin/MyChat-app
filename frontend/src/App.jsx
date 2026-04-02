@@ -15,6 +15,7 @@ import { useThemeStore } from './store/themeStore';
 import Search from './pages/Search';
 import UserProfile from './pages/UserProfile';
 import { useChatStore } from './store/useChatStore';
+import NotificationToast from './components/NotificationToast.jsx';
 // protect routes;
 
 const ProtectedRoute = ({children}) => {
@@ -71,6 +72,7 @@ function App() {
   return (
     <div data-theme={theme}>
       <Toaster/>
+      <NotificationToast />
       <Routes>
         <Route path='/' element={<ProtectedRoute>
           <Home/>

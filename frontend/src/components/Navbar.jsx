@@ -7,6 +7,7 @@ import { useChatStore } from '../store/useChatStore';
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const { selectedUser, setSelectedUser, typingUsers } = useChatStore();
     const { isLoading, logout, isAuthenticated } = useAuthStore();
     const {
         requestsInbox,
@@ -37,19 +38,29 @@ const Navbar = () => {
         }
     }
 
+    const handleNavigate = (path) => {
+        setSelectedUser(null);
+        navigate(path);
+    };
+
     return (
         <div className='flex justify-between items-center p-3 bg-base-300'>
-            <Link to={'/'} className='flex gap-1'>
+            <Link to={'/'} className='flex gap-1' onClick={() => setSelectedUser(null)}>
                 <HomeIcon className='size-8' />
                 <h1 className='text-2xl font-bold'>Chatrooms</h1>
             </Link>
             <div className='flex items-center gap-2'>
 
-                <button className='btn btn-ghost' onClick={() => navigate('/settings')}>
+                <button className='btn btn-ghost' onClick={() => {
+                    handleNavigate('/settings')
+
+                }}>
                     <SettingsIcon />Settings
                 </button>
 
-                {isAuthenticated && <button className='btn btn-ghost' onClick={() => navigate('/profile')}>
+                {isAuthenticated && <button className='btn btn-ghost' onClick={() => {
+                    handleNavigate('/profile');
+                }}>
                     <UserIcon />Profile
                 </button>}
 
